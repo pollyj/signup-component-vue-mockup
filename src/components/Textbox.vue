@@ -1,5 +1,5 @@
 <template>
-  <div class="textbox">
+  <div class="textbox-wrapper">
     <label :for="tag" class="textbox-label">{{ name }}</label>
     <input :id="tag" :type="type" class="textbox-input" />
   </div>
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-.textbox {
+.textbox-wrapper {
   display: flex;
   flex-direction: column;
 }
@@ -38,5 +38,6 @@ export default {
   background-color: #F5F6F7;
   font-size: 1rem;
   padding: 5px;
+  margin-bottom: 15px;
 }
 </style>

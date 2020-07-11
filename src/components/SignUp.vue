@@ -1,44 +1,45 @@
 <template>
   <div class="signup-component">
-    <div class="signup-img">
-      <img src="../assets/undraw_team_spirit_hrr4.svg" alt height="200px" />
+    <div class="signup-img-wrapper">
+      <img class="signup-img" src="../assets/undraw_team_spirit_hrr4.svg" alt height="200px" />
     </div>
-    <div class="signup-grid-container">
-      <!-- <form> -->
-      <div class="signup-form-title">
-        <h1 class="title-text">Sign Up Form</h1>
-        <p class="required-text">All fields are required.</p>
+    <form id="signup-form">
+      <div class="signup-grid-container">
+        <div class="signup-form-title">
+          <h1 class="title-text">Sign Up Form</h1>
+          <p class="required-text">All fields are required.</p>
+        </div>
+        <div class="signup-form-first-name">
+          <Textbox tag="f-name" name="First Name" type="text" />
+        </div>
+        <div class="signup-form-last-name">
+          <Textbox tag="l-name" name="Last Name" type="text" />
+        </div>
+        <div class="signup-form-email">
+          <Textbox tag="email" name="Email Address" type="email" />
+        </div>
+        <div class="signup-form-password">
+          <Textbox tag="password" name="Password" type="password" />
+        </div>
+        <div class="signup-form-confirm-password">
+          <Textbox tag="c-password" name="Confirm Password" type="password" />
+        </div>
+        <div class="signup-form-terms">
+          <Checkbox tag="terms" name="Terms and Conditions" />
+          <p><span class="small-text">Creating an account means that you agree to our <a href="/">terms and conditions</a>.</span></p>
+        </div>
+        <div class="signup-form-submit-btn">
+          <Button btntext="Sign Up" form="signup-form" />
+        </div>
       </div>
-      <div class="signup-form-first-name">
-        <Textbox tag="f-name" name="First Name" type="text" />
-      </div>
-      <div class="signup-form-last-name">
-        <Textbox tag="l-name" name="Last Name" type="text" />
-      </div>
-      <div class="signup-form-email">
-        <Textbox tag="email" name="Email Address" type="email" />
-      </div>
-      <div class="signup-form-password">
-        <Textbox tag="password" name="Password" type="password" />
-      </div>
-      <div class="signup-form-confirm-password">
-        <Textbox tag="c-password" name="Confirm Password" type="password" />
-      </div>
-      <div class="signup-form-terms">
-        <p>Terms And Conditions</p>
-      </div>
-      <div class="signup-form-submit-btn">
-        <Button btntext="Sign Up" />
-      </div>
-    </div>
-    <!-- </form> -->
+    </form>
   </div>
 </template>
 
 <script>
 import Textbox from "./Textbox.vue";
 import Button from "./Button.vue";
-// import Illustration from '../assets/undraw_team_spirit_hrr4.svg'
+import Checkbox from "./Checkbox.vue"
 
 export default {
   name: "SignUp",
@@ -47,8 +48,8 @@ export default {
   },
   components: {
     Textbox,
-    Button
-    // Illustration
+    Button,
+    Checkbox,
   },
   props: {
     msg: String
@@ -65,6 +66,7 @@ export default {
     border-radius: 25px;
     width: 90%;
     display: flex;
+    margin-top: 20px;
   }
 
   .signup-grid-container {
@@ -84,7 +86,7 @@ export default {
     text-align: start;
   }
 
-  .signup-img {
+  .signup-img-wrapper {
     display: none;
   }
 
@@ -94,7 +96,7 @@ export default {
   }
 
   .title-text {
-    border-bottom: 1px solid #F9A826;
+    border-bottom: 1px solid #f9a826;
     width: 100%;
     padding-bottom: 15px;
     margin-bottom: 0;
@@ -104,6 +106,7 @@ export default {
   .required-text {
     font-style: italic;
     font-size: 0.9rem;
+    margin-top: 15px;
   }
 
   .signup-form-first-name {
@@ -135,31 +138,44 @@ export default {
     justify-content: center;
     align-items: center;
   }
+
+  .small-text {
+      font-size: 0.8rem;
+  }
 }
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) {
   .signup-component {
     display: flex;
+    width: 65%;
+    align-self: center;
   }
 
   .signup-grid-container {
     padding: 40px;
-    width: 35vh;
+    width: 50%;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr 1fr 1fr 1fr 1fr 1fr;
-    gap: 1px 1px;
+    gap: 1px 10px;
     grid-template-areas:
       "signup-form-title signup-form-title" "signup-form-first-name signup-form-last-name" "signup-form-email signup-form-email" "signup-form-password signup-form-password" "signup-form-confirm-password signup-form-confirm-password"
       "signup-form-terms signup-form-terms" "signup-form-submit-btn signup-form-submit-btn";
   }
 
-  .signup-form-img {
-    /* height: 100%;
-      width: 100%; */
+  .signup-img-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 50%;
+    background-color: rgb(248, 243, 239);
+    border-radius: 25px 0 0 25px;
+  }
+
+  .signup-img {
+      height: auto;
+    width: 70%;
+    
   }
 
   .signup-form-title {

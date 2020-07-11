@@ -20,9 +20,9 @@ export default {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* height: 100%;
-  width: 100%; */
   display: flex;
+  height: 100vh;
+  width: 100vw;
   justify-content: center;
   align-items: center;
   text-align: center;
