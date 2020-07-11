@@ -8,6 +8,9 @@
 <script>
 export default {
   name: "Textbox",
+  data: function() {
+    return {};
+  },
   props: {
     id: String,
     name: String,
@@ -24,11 +27,16 @@ export default {
 
 .textbox-label {
   padding-bottom: 5px;
+  color: #da8e14;
+  font-weight: bold;
 }
 
 .textbox-input {
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
-    height: 1.8rem;
+  border-radius: 5px;
+  border: 1px solid #e4e2e2;
+  height: 1.8rem;
+  background-color: #F5F6F7;
+  font-size: 1rem;
+  padding: 5px;
 }
 </style>

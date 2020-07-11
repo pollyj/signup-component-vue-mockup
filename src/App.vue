@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <SignUp/>
+    <SignUp />
   </div>
 </template>
 
 <script>
-import SignUp from './components/SignUp.vue'
+import SignUp from "./components/SignUp.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     SignUp
   }
-}
+};
 </script>
 
 <style>
@@ -21,12 +20,13 @@ export default {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
+  /* height: 100%;
+  width: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: #2c3e50;
-  background-color: #FCFCFC;
+  background-color: #fcfcfc;
 }
 </style>

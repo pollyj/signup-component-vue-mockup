@@ -1,0 +1,7 @@
+/* Make Vue app stretch entire width & height of page */
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
