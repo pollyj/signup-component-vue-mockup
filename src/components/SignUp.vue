@@ -1,23 +1,24 @@
 <template>
   <div class="signup-grid-container">
+    <!-- <form> -->
     <div class="signup-form-title">
       <h1 class="title-text">Sign Up Form</h1>
       <p class="required-text">All fields are required.</p>
     </div>
     <div class="signup-form-first-name">
-      <p>First Name</p>
+      <Textbox tag="f-name" name="First Name" type="text"/>
     </div>
     <div class="signup-form-last-name">
-      <p>Last Name</p>
+      <Textbox tag="l-name" name="Last Name" type="text"/>
     </div>
     <div class="signup-form-email">
-      <p>Email Address</p>
+      <Textbox tag="email" name="Email Address" type="email"/>
     </div>
     <div class="signup-form-password">
-      <p>Password</p>
+      <Textbox tag="password" name="Password" type="password"/>
     </div>
     <div class="signup-form-confirm-password">
-      <p>Confirm Password</p>
+      <Textbox tag="c-password" name="Confirm Password" type="password"/>
     </div>
     <div class="signup-form-terms">
       <p>Terms And Conditions</p>
@@ -25,12 +26,18 @@
     <div class="signup-form-submit-btn">
       <p>SIGN UP</p>
     </div>
+    <!-- </form> -->
   </div>
 </template>
 
 <script>
+import Textbox from "./Textbox.vue";
+
 export default {
   name: "SignUp",
+  components: {
+    Textbox
+  },
   props: {
     msg: String
   }
@@ -53,12 +60,12 @@ export default {
 
 div[class*="signup-form"] {
   display: flex;
+  flex-direction: column;
+  text-align: start;
 }
 
 .signup-form-title {
   grid-area: signup-form-title;
-  flex-direction: column;
-  text-align: start;
 }
 
 .title-text {
@@ -69,8 +76,8 @@ div[class*="signup-form"] {
 }
 
 .required-text {
-    font-style: italic;
-    font-size: 0.9rem;
+  font-style: italic;
+  font-size: 0.9rem;
 }
 
 .signup-form-first-name {
