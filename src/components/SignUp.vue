@@ -6,7 +6,7 @@
     <form id="signup-form">
       <div class="signup-grid-container">
         <div class="signup-form-title">
-          <h1 class="title-text">Sign Up Form</h1>
+          <h1 class="title-text">Create Your Account</h1>
           <p class="required-text">All fields are required.</p>
         </div>
         <div class="signup-form-first-name">
@@ -26,7 +26,12 @@
         </div>
         <div class="signup-form-terms">
           <Checkbox tag="terms" name="Terms and Conditions" />
-          <p><span class="small-text">Creating an account means that you agree to our <a href="/">terms and conditions</a>.</span></p>
+          <p>
+            <span class="small-text">
+              Creating an account means that you agree to our
+              <a href="/">terms and conditions</a>.
+            </span>
+          </p>
         </div>
         <div class="signup-form-submit-btn">
           <Button btntext="Sign Up" form="signup-form" />
@@ -39,7 +44,7 @@
 <script>
 import Textbox from "./Textbox.vue";
 import Button from "./Button.vue";
-import Checkbox from "./Checkbox.vue"
+import Checkbox from "./Checkbox.vue";
 
 export default {
   name: "SignUp",
@@ -49,7 +54,7 @@ export default {
   components: {
     Textbox,
     Button,
-    Checkbox,
+    Checkbox
   },
   props: {
     msg: String
@@ -59,21 +64,16 @@ export default {
 
 <style scoped>
 /* Smartphones (landscape) ----------- */
-@media only screen and (min-width: 321px) {
+@media screen and (min-width: 321px) {
   .signup-component {
     background-color: #fff;
-    box-shadow: 10px 10px 8px #e4e4e4;
-    border-radius: 25px;
-    width: 90%;
     display: flex;
-    margin-top: 20px;
   }
 
   .signup-grid-container {
     display: grid;
     padding: 20px;
     margin: 10px;
-    width: 100%;
     grid-template-columns: 1fr;
     grid-template-rows: 1.7fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 1px 1px;
@@ -140,16 +140,55 @@ export default {
   }
 
   .small-text {
-      font-size: 0.8rem;
+    font-size: 0.8rem;
   }
 }
 
 /* iPads (portrait and landscape) ----------- */
-@media only screen and (min-device-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .signup-component {
+    box-shadow: 10px 10px 8px #e4e4e4;
+    border-radius: 25px;
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    width: 80%;
+    align-self: center;
+  }
+
+  .signup-grid-container {
+    padding: 20px 40px;
+  }
+
+  .signup-img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(248, 243, 239);
+    border-radius: 25px 25px 0 0;
+  }
+
+  .signup-img {
+    max-height: 200px;
+    width: auto;
+    padding: 15px 0;
+  }
+
+  .signup-form-title {
+    grid-area: signup-form-title;
+    margin-bottom: 25px;
+  }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width: 1024px) {
   .signup-component {
     display: flex;
     width: 65%;
     align-self: center;
+    box-shadow: 10px 10px 8px #e4e4e4;
+    border-radius: 25px;
   }
 
   .signup-grid-container {
@@ -173,19 +212,13 @@ export default {
   }
 
   .signup-img {
-      height: auto;
+    height: auto;
     width: 70%;
-    
   }
 
   .signup-form-title {
     grid-area: signup-form-title;
     margin-bottom: 25px;
   }
-}
-
-/* Desktops and laptops ----------- */
-@media only screen and (min-width: 1224px) {
-  /* STYLES GO HERE */
 }
 </style>
