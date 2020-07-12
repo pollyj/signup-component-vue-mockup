@@ -1,48 +1,69 @@
 <template>
-  <form id="signup-form" @submit="validateForm">
+  <form id="signup-form" @submit.prevent="validateForm">
     <div class="signup-grid-container">
       <div class="signup-form-title">
         <h1 class="title-text">Create Your Account</h1>
         <p class="required-text">All fields are required.</p>
       </div>
+
       <div class="signup-form-first-name textbox-wrapper">
         <label for="f-name" class="textbox-label">First Name</label>
-        <input id="f-name" type="text" class="textbox-input" />
+        <input id="f-name" v-model="fName" type="text" class="textbox-input" />
+        <p v-show="fNameError" class="warning-text-password">{{fNameError}}</p>
       </div>
+
       <div class="signup-form-last-name textbox-wrapper">
         <label for="l-name" class="textbox-label">Last Name</label>
-        <input id="l-name" type="text" class="textbox-input" />
+        <input id="l-name" v-model="lName" type="text" class="textbox-input" />
+        <p v-show="lNameError" class="warning-text-password">{{lNameError}}</p>
       </div>
+
       <div class="signup-form-email textbox-wrapper">
         <label for="email" class="textbox-label">Email Address</label>
-        <input id="email" type="email" class="textbox-input" />
+        <input id="email" v-model="email" type="email" class="textbox-input" />
+        <p v-show="emailError" class="warning-text-password">{{emailError}}</p>
       </div>
+
       <div class="signup-form-password textbox-wrapper">
-          <label for="password" class="textbox-label">Password</label>
-          <div class="textbox-line-wrapper">
-            <input id="password" :type="passwordInputType" class="textbox-btn-input" />
-            <button
-              v-on:click="togglePasswordDisplay('password')"
-              type="button"
-              class="textbox-btn"
-            >{{passwordBtnText}}</button>
-          </div>
+        <label for="password" class="textbox-label">Password</label>
+        <div class="textbox-line-wrapper">
+          <input
+            id="password"
+            v-model="password"
+            :type="passwordInputType"
+            class="textbox-btn-input"
+          />
+          <button
+            v-on:click="togglePasswordDisplay('password')"
+            type="button"
+            class="textbox-btn"
+          >{{passwordBtnText}}</button>
+        </div>
         <div class="help-text">
           <ul>
-            <li class="pw-req-1">- Minimum 12 characters</li>
             <li
+              v-bind:class="[helpText1 ? '' : 'warning-text-req1']"
+              class="pw-req-1"
+            >- Minimum 12 characters</li>
+            <li
+              v-bind:class="[helpText2 ? '' : 'warning-text-req2']"
               class="pw-req-2"
             >- Must contain at least 2 upper case letters, 2 numbers, and 2 symbols</li>
           </ul>
         </div>
-        <p class="warning-text-password"></p>
+        <p v-show="passwordError" class="warning-text-password">{{passwordError}}</p>
       </div>
 
       <div class="signup-form-confirm-password">
         <div class="textbox-wrapper">
           <label for="c-password" class="textbox-label">Confirm Password</label>
           <div class="textbox-line-wrapper">
-            <input id="c-password" :type="confirmInputType" class="textbox-btn-input" />
+            <input
+              id="c-password"
+              v-model="confirmPassword"
+              :type="confirmInputType"
+              class="textbox-btn-input"
+            />
             <button
               v-on:click="togglePasswordDisplay('confirm')"
               type="button"
@@ -50,17 +71,18 @@
             >{{confirmBtnText}}</button>
           </div>
         </div>
-        <p class="warning-text-confirm-password"></p>
+        <p v-show="confirmPasswordError" class="warning-text-password">{{confirmPasswordError}}</p>
       </div>
+
       <div class="signup-form-terms">
         <div class="checkbox-wrapper">
           <label for="terms" class="checkbox-label">Terms and Conditions</label>
           <div class="checkbox-line-wrapper">
-            <input id="terms" type="checkbox" class="checkbox-input" />
+            <input id="terms" v-model="terms" type="checkbox" class="checkbox-input" />
             <p class="helper-text">I agree to the terms and conditions</p>
           </div>
         </div>
-        <p class="warning-text-terms"></p>
+        <p v-show="termsError" class="warning-text-password">{{termsError}}</p>
       </div>
       <div class="signup-form-submit-btn">
         <div class="btn-wrapper">
@@ -76,33 +98,124 @@ export default {
   name: "SignUpForm",
   data: function() {
     return {
+      fName: null,
+      fNameError: null,
+      lName: null,
+      lNameError: null,
+      email: null,
+      emailError: null,
+      password: null,
+      passwordError: null,
+      confirmPassword: null,
+      confirmPasswordError: null,
+      terms: false,
+      termsError: false,
       passwordInputType: "password",
       passwordBtnText: "Show",
       confirmInputType: "password",
       confirmBtnText: "Show",
+      helpText1: true,
+      helpText2: true
     };
   },
   methods: {
     togglePasswordDisplay(type) {
-        if (type === "password") {
-            if (this.passwordInputType === "text") {
-              this.passwordBtnText = "Show";
-              this.passwordInputType = "password";
-            } else {
-              this.passwordBtnText = "Hide";
-              this.passwordInputType = "text";
-            }
-        } else if (type === "confirm") {
-            if (this.confirmInputType === "text") {
-              this.confirmBtnText = "Show";
-              this.confirmInputType = "password";
-            } else {
-              this.confirmBtnText = "Hide";
-              this.confirmInputType = "text";
-            }
+      if (type === "password") {
+        if (this.passwordInputType === "text") {
+          this.passwordBtnText = "Show";
+          this.passwordInputType = "password";
+        } else {
+          this.passwordBtnText = "Hide";
+          this.passwordInputType = "text";
         }
+      } else if (type === "confirm") {
+        if (this.confirmInputType === "text") {
+          this.confirmBtnText = "Show";
+          this.confirmInputType = "password";
+        } else {
+          this.confirmBtnText = "Hide";
+          this.confirmInputType = "text";
+        }
+      }
     },
-    validateForm() {}
+    validateForm() {
+      //reset previous validation errors
+      this.fNameError = null;
+      this.lNameError = null;
+      this.emailError = null;
+      this.termsError = null;
+
+      if (!this.fName) {
+        this.fNameError = "Please enter a first name.";
+      }
+
+      if (!this.lName) {
+        this.lNameError = "Please enter a last name.";
+      }
+
+      this.validateEmail(this.email);
+      this.validatePassword(this.password);
+
+      if (!this.terms) {
+        this.termsError = "Please check the terms and conditions.";
+      }
+    },
+    validateEmail(email) {
+      this.emailError = null;
+
+      if (!this.email) {
+        this.emailError = "Please enter an email.";
+        return false;
+      } else if (
+        !/^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+      ) {
+        this.emailError = "Please enter a valid email.";
+        return false;
+      }
+      return true;
+    },
+    validatePassword(string) {
+      if (!string) {
+        this.passwordError = "Please enter a password.";
+        return false;
+      } else if (string.length < 12) {
+        this.passwordError = null;
+        this.helpText1 = false;
+        return false;
+      }
+      //reset any error messages from previous attempts
+      this.passwordError = null;
+      this.helpText1 = true;
+      this.helpText2 = true;
+
+      let map = {
+        number: 0,
+        upper: 0,
+        symbol: 0
+      };
+      for (let i = 0; i < string.length; i++) {
+        if (Number.isInteger(Number(string.charAt(i)))) {
+          map.number += 1;
+        } else if (string[i].match(/[A-Z]/)) {
+          map.upper += 1;
+        } else if (!string[i].match(/[a-z]/i)) {
+          map.symbol += 1;
+        }
+      }
+
+      if (map.number >= 2 && map.upper >= 2 && map.symbol >= 2) {
+        if (this.password === this.confirmPassword) {
+          this.confirmPasswordError = null;
+          return true;
+        } else {
+          this.confirmPasswordError = "Passwords don't match.";
+          return false;
+        }
+      } else {
+        this.helpText2 = false;
+        return false;
+      }
+    }
   }
 };
 </script>
@@ -183,7 +296,7 @@ export default {
     font-size: 0.8rem;
   }
 
-  p[class*="warning-text-"] {
+  [class*="warning-text"] {
     line-height: 1rem;
     height: 20px;
     color: red;
@@ -196,7 +309,7 @@ export default {
   .textbox-wrapper {
     display: flex;
     flex-direction: column;
-     margin-bottom: 15px;
+    margin-bottom: 15px;
   }
 
   .textbox-label {
@@ -212,7 +325,6 @@ export default {
     background-color: #f5f6f7;
     font-size: 1rem;
     padding: 5px;
-   
   }
 
   /* TEXTBOX WITH BUTTON STYLES */
