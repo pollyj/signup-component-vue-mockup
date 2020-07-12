@@ -13,18 +13,9 @@ import SignUpForm from './SignUpForm';
 
 export default {
   name: "SignUpPage",
-  data: function() {
-    return {};
-  },
   components: {
     SignUpForm
   },
-  props: {
-    msg: String
-  },
-  methods: {
-    validateForm() {}
-  }
 };
 </script>
 

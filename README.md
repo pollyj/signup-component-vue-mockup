@@ -1,5 +1,7 @@
 # Signup Component Mockup (Vue.js)
 
+Check out the live version here: https://signup-component-mockup.netlify.app/.
+
 A design mockup for a signup component.
 Fully responsive for smartphones, ipads, and desktops.
 Includes validation for 
@@ -12,7 +14,7 @@ Includes validation for
 
 ------
 
-Illustration credit to (undraw)[https://undraw.co].
+Illustration credit to [Undraw](https://undraw.co).
 
 ------
 To run the project locally:
