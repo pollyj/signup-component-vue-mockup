@@ -291,11 +291,12 @@ export default {
 
   .help-text {
     font-size: 0.8rem;
+    line-height: 0.9rem;
     margin: -5px 0;
   }
 
   [class*="warning-text"] {
-    min-height: 20px;
+    min-height: 0.9rem;
     color: red;
     font-weight: bold;
     font-size: 0.8rem;
