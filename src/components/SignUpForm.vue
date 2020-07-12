@@ -9,19 +9,19 @@
       <div class="signup-form-first-name textbox-wrapper">
         <label for="f-name" class="textbox-label">First Name</label>
         <input id="f-name" v-model="fName" type="text" class="textbox-input" />
-        <p v-show="fNameError" class="warning-text-password">{{fNameError}}</p>
+        <p class="warning-text-password">{{fNameError ? fNameError : ""}}</p>
       </div>
 
       <div class="signup-form-last-name textbox-wrapper">
         <label for="l-name" class="textbox-label">Last Name</label>
         <input id="l-name" v-model="lName" type="text" class="textbox-input" />
-        <p v-show="lNameError" class="warning-text-password">{{lNameError}}</p>
+        <p class="warning-text-password">{{lNameError ? lNameError : ""}}</p>
       </div>
 
       <div class="signup-form-email textbox-wrapper">
         <label for="email" class="textbox-label">Email Address</label>
         <input id="email" v-model="email" type="email" class="textbox-input" />
-        <p v-show="emailError" class="warning-text-password">{{emailError}}</p>
+        <p class="warning-text-password">{{emailError ? emailError : ""}}</p>
       </div>
 
       <div class="signup-form-password textbox-wrapper">
@@ -51,7 +51,7 @@
             >- Must contain at least 2 upper case letters, 2 numbers, and 2 symbols</li>
           </ul>
         </div>
-        <p v-show="passwordError" class="warning-text-password">{{passwordError}}</p>
+        <div class="warning-text-password">{{passwordError ? passwordError : ""}}</div>
       </div>
 
       <div class="signup-form-confirm-password">
@@ -71,7 +71,7 @@
             >{{confirmBtnText}}</button>
           </div>
         </div>
-        <p v-show="confirmPasswordError" class="warning-text-password">{{confirmPasswordError}}</p>
+        <p class="warning-text-password">{{confirmPasswordError ? confirmPasswordError : ""}}</p>
       </div>
 
       <div class="signup-form-terms">
@@ -82,12 +82,10 @@
             <p class="helper-text">I agree to the terms and conditions</p>
           </div>
         </div>
-        <p v-show="termsError" class="warning-text-password">{{termsError}}</p>
+        <p class="warning-text-password">{{termsError ? termsError : ""}}</p>
       </div>
-      <div class="signup-form-submit-btn">
-        <div class="btn-wrapper">
-          <button type="submit" class="btn" form="signup-form">Sign Up</button>
-        </div>
+      <div class="signup-form-submit-btn btn-wrapper">
+        <button type="submit" class="btn" form="signup-form">Sign Up</button>
       </div>
     </div>
   </form>
@@ -144,6 +142,9 @@ export default {
       this.lNameError = null;
       this.emailError = null;
       this.termsError = null;
+      this.passwordError = null;
+      this.helpText1 = true;
+      this.helpText2 = true;
 
       if (!this.fName) {
         this.fNameError = "Please enter a first name.";
@@ -183,10 +184,6 @@ export default {
         this.helpText1 = false;
         return false;
       }
-      //reset any error messages from previous attempts
-      this.passwordError = null;
-      this.helpText1 = true;
-      this.helpText2 = true;
 
       let map = {
         number: 0,
@@ -222,12 +219,12 @@ export default {
 
 <style scoped>
 /* Smartphones (landscape) ----------- */
-@media screen and (min-width: 321px) {
+@media screen and (min-width: 320px) {
   .signup-grid-container {
     display: grid;
     padding: 20px;
     margin: 10px;
-    grid-template-columns: 1fr;
+    grid-template-columns: auto;
     grid-template-rows: auto auto auto auto auto auto auto auto;
     gap: 1px 1px;
     grid-template-areas: "signup-form-title" "signup-form-first-name" "signup-form-last-name" "signup-form-email" "signup-form-password" "signup-form-confirm-password" "signup-form-terms" "signup-form-submit-btn";
@@ -241,13 +238,13 @@ export default {
 
   .signup-form-title {
     grid-area: signup-form-title;
-    margin-bottom: 5px;
+    /* margin-top: 20px; */
   }
 
   .title-text {
     border-bottom: 1px solid #f9a826;
     width: 100%;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
     margin-bottom: 0;
     color: #da8e14;
   }
@@ -255,7 +252,7 @@ export default {
   .required-text {
     font-style: italic;
     font-size: 0.9rem;
-    margin-top: 15px;
+    margin: 15px 0;
   }
 
   .signup-form-first-name {
@@ -294,11 +291,11 @@ export default {
 
   .help-text {
     font-size: 0.8rem;
+    margin: -5px 0;
   }
 
   [class*="warning-text"] {
-    line-height: 1rem;
-    height: 20px;
+    min-height: 20px;
     color: red;
     font-weight: bold;
     font-size: 0.8rem;
@@ -309,7 +306,7 @@ export default {
   .textbox-wrapper {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
 
   .textbox-label {
@@ -325,6 +322,7 @@ export default {
     background-color: #f5f6f7;
     font-size: 1rem;
     padding: 5px;
+    margin-bottom: 5px;
   }
 
   /* TEXTBOX WITH BUTTON STYLES */
@@ -356,9 +354,8 @@ export default {
 
   .textbox-btn {
     background-color: #fff;
-    /* height: 100%; */
     min-width: 60px;
-    padding: 0 8px;
+    padding: 0 5px;
     font-size: 0.8rem;
     border: 1px solid #e4e2e2;
     border-radius: 0 5px 5px 0;
@@ -381,6 +378,8 @@ export default {
 
   .checkbox-line-wrapper {
     display: flex;
+    padding: 5px 0;
+    margin-bottom: 5px;
   }
 
   .checkbox-input {
@@ -403,38 +402,17 @@ export default {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    margin-top: 15px;
   }
 }
 
 /* iPads (portrait and landscape) ----------- */
-@media screen and (min-width: 768px) {
-  .signup-component {
-    box-shadow: 10px 10px 8px #e4e4e4;
-    border-radius: 25px;
-    display: flex;
-    margin-top: 20px;
-    flex-direction: column;
-    width: 80%;
-    align-self: center;
-  }
+@media screen and (min-width: 768px) and (max-width: 1023px) {
 
   .signup-grid-container {
+    max-width: 500px;
+    margin: 0 auto;
     padding: 20px 40px;
-  }
-
-  .signup-img-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background-color: rgb(248, 243, 239);
-    border-radius: 25px 25px 0 0;
-  }
-
-  .signup-img {
-    max-height: 200px;
-    width: auto;
-    padding: 15px 0;
   }
 
   .signup-form-title {
@@ -445,37 +423,14 @@ export default {
 
 /* Desktops and laptops ----------- */
 @media only screen and (min-width: 1024px) {
-  .signup-component {
-    display: flex;
-    width: 65%;
-    align-self: center;
-    box-shadow: 10px 10px 8px #e4e4e4;
-    border-radius: 25px;
-  }
-
   .signup-grid-container {
-    padding: 40px;
-    /* width: 100%; */
+    padding: 20px 40px;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto auto auto auto auto;
     gap: 1px 20px;
     grid-template-areas:
       "signup-form-title signup-form-title" "signup-form-first-name signup-form-last-name" "signup-form-email signup-form-email" "signup-form-password signup-form-password" "signup-form-confirm-password signup-form-confirm-password"
       "signup-form-terms signup-form-terms" "signup-form-submit-btn signup-form-submit-btn";
-  }
-
-  .signup-img-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    background-color: rgb(248, 243, 239);
-    border-radius: 25px 0 0 25px;
-  }
-
-  .signup-img {
-    height: auto;
-    width: 70%;
   }
 
   .signup-form-title {
