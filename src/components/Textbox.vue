@@ -2,7 +2,6 @@
   <div class="textbox-wrapper">
     <label :for="tag" class="textbox-label">{{ name }}</label>
     <input :id="tag" :type="type" class="textbox-input" />
-    <p class="warning-text"></p>
   </div>
 </template>
 

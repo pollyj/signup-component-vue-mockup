@@ -3,67 +3,34 @@
     <div class="signup-img-wrapper">
       <img class="signup-img" src="../assets/undraw_team_spirit_hrr4.svg" alt height="200px" />
     </div>
-    <form id="signup-form">
-      <div class="signup-grid-container">
-        <div class="signup-form-title">
-          <h1 class="title-text">Create Your Account</h1>
-          <p class="required-text">All fields are required.</p>
-        </div>
-        <div class="signup-form-first-name">
-          <Textbox tag="f-name" name="First Name" type="text" />
-        </div>
-        <div class="signup-form-last-name">
-          <Textbox tag="l-name" name="Last Name" type="text" />
-        </div>
-        <div class="signup-form-email">
-          <Textbox tag="email" name="Email Address" type="email" />
-        </div>
-        <div class="signup-form-password">
-          <TextboxWithButton tag="password" name="Password" type="password" />
-          <div class="help-text">
-            <ul>
-              <li>- Minimum 12 characters</li>
-              <li>- Must contain at least 2 upper case letters, 2 numbers, and 2 symbols</li>
-            </ul>
-          </div>
-        </div>
-        <div class="signup-form-confirm-password">
-          <TextboxWithButton tag="c-password" name="Confirm Password" type="password" />
-        </div>
-        <div class="signup-form-terms">
-          <Checkbox
-            tag="terms"
-            name="Terms and Conditions"
-            msg="I agree to the terms and conditions"
-          />
-        </div>
-        <div class="signup-form-submit-btn">
-          <Button btntext="Sign Up" form="signup-form" />
-        </div>
-      </div>
-    </form>
+    <SignUpForm />
   </div>
 </template>
 
 <script>
-import Textbox from "./Textbox.vue";
-import Button from "./Button.vue";
-import Checkbox from "./Checkbox.vue";
-import TextboxWithButton from "./TextboxWithButton.vue";
+// import Textbox from "./Textbox.vue";
+// import Button from "./Button.vue";
+// import Checkbox from "./Checkbox.vue";
+// import TextboxWithButton from "./TextboxWithButton.vue";
+import SignUpForm from './SignUpForm';
 
 export default {
-  name: "SignUp",
+  name: "SignUpPage",
   data: function() {
     return {};
   },
   components: {
-    Textbox,
-    Button,
-    Checkbox,
-    TextboxWithButton,
+    SignUpForm
+    // Textbox,
+    // Button,
+    // Checkbox,
+    // TextboxWithButton
   },
   props: {
     msg: String
+  },
+  methods: {
+    validateForm() {}
   }
 };
 </script>
@@ -81,7 +48,7 @@ export default {
     padding: 20px;
     margin: 10px;
     grid-template-columns: 1fr;
-    grid-template-rows: 1.7fr 1fr 1fr 1fr auto 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto auto;
     gap: 1px 1px;
     grid-template-areas: "signup-form-title" "signup-form-first-name" "signup-form-last-name" "signup-form-email" "signup-form-password" "signup-form-confirm-password" "signup-form-terms" "signup-form-submit-btn";
   }
@@ -152,6 +119,14 @@ export default {
   .help-text {
     font-size: 0.8rem;
   }
+
+  p[class*="warning-text-"] {
+    line-height: 1rem;
+    height: 20px;
+    color: red;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
 }
 
 /* iPads (portrait and landscape) ----------- */
@@ -165,10 +140,10 @@ export default {
     width: 80%;
     align-self: center;
   }
-
+/* 
   .signup-grid-container {
     padding: 20px 40px;
-  }
+  } */
 
   .signup-img-wrapper {
     display: flex;
@@ -185,10 +160,10 @@ export default {
     padding: 15px 0;
   }
 
-  .signup-form-title {
+  /* .signup-form-title {
     grid-area: signup-form-title;
     margin-bottom: 25px;
-  }
+  } */
 }
 
 /* Desktops and laptops ----------- */
@@ -201,16 +176,16 @@ export default {
     border-radius: 25px;
   }
 
-  .signup-grid-container {
+  /* .signup-grid-container {
     padding: 40px;
     width: 50%;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr 1fr auto 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto;
     gap: 1px 10px;
     grid-template-areas:
       "signup-form-title signup-form-title" "signup-form-first-name signup-form-last-name" "signup-form-email signup-form-email" "signup-form-password signup-form-password" "signup-form-confirm-password signup-form-confirm-password"
       "signup-form-terms signup-form-terms" "signup-form-submit-btn signup-form-submit-btn";
-  }
+  } */
 
   .signup-img-wrapper {
     display: flex;
@@ -226,9 +201,9 @@ export default {
     width: 70%;
   }
 
-  .signup-form-title {
+  /* .signup-form-title {
     grid-area: signup-form-title;
     margin-bottom: 25px;
-  }
+  } */
 }
 </style>
