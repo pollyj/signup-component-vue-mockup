@@ -19,19 +19,23 @@
           <Textbox tag="email" name="Email Address" type="email" />
         </div>
         <div class="signup-form-password">
-          <Textbox tag="password" name="Password" type="password" />
+          <TextboxWithButton tag="password" name="Password" type="password" />
+          <div class="help-text">
+            <ul>
+              <li>- Minimum 12 characters</li>
+              <li>- Must contain at least 2 upper case letters, 2 numbers, and 2 symbols</li>
+            </ul>
+          </div>
         </div>
         <div class="signup-form-confirm-password">
-          <Textbox tag="c-password" name="Confirm Password" type="password" />
+          <TextboxWithButton tag="c-password" name="Confirm Password" type="password" />
         </div>
         <div class="signup-form-terms">
-          <Checkbox tag="terms" name="Terms and Conditions" />
-          <p>
-            <span class="small-text">
-              Creating an account means that you agree to our
-              <a href="/">terms and conditions</a>.
-            </span>
-          </p>
+          <Checkbox
+            tag="terms"
+            name="Terms and Conditions"
+            msg="I agree to the terms and conditions"
+          />
         </div>
         <div class="signup-form-submit-btn">
           <Button btntext="Sign Up" form="signup-form" />
@@ -45,6 +49,7 @@
 import Textbox from "./Textbox.vue";
 import Button from "./Button.vue";
 import Checkbox from "./Checkbox.vue";
+import TextboxWithButton from "./TextboxWithButton.vue";
 
 export default {
   name: "SignUp",
@@ -54,7 +59,8 @@ export default {
   components: {
     Textbox,
     Button,
-    Checkbox
+    Checkbox,
+    TextboxWithButton,
   },
   props: {
     msg: String
@@ -75,12 +81,12 @@ export default {
     padding: 20px;
     margin: 10px;
     grid-template-columns: 1fr;
-    grid-template-rows: 1.7fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1.7fr 1fr 1fr 1fr auto 1fr 1fr 1fr;
     gap: 1px 1px;
     grid-template-areas: "signup-form-title" "signup-form-first-name" "signup-form-last-name" "signup-form-email" "signup-form-password" "signup-form-confirm-password" "signup-form-terms" "signup-form-submit-btn";
   }
 
-  div[class*="signup-form"] {
+  div[class*="signup-form-"] {
     display: flex;
     flex-direction: column;
     text-align: start;
@@ -139,7 +145,11 @@ export default {
     align-items: center;
   }
 
-  .small-text {
+  ul {
+    padding: 0;
+  }
+
+  .help-text {
     font-size: 0.8rem;
   }
 }
@@ -195,7 +205,7 @@ export default {
     padding: 40px;
     width: 50%;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr auto 1fr 1fr 1fr;
     gap: 1px 10px;
     grid-template-areas:
       "signup-form-title signup-form-title" "signup-form-first-name signup-form-last-name" "signup-form-email signup-form-email" "signup-form-password signup-form-password" "signup-form-confirm-password signup-form-confirm-password"

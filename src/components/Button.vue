@@ -27,8 +27,7 @@ export default {
   font-weight: bold;
   /* border: 2px solid #000000; */
   border: none;
-  border-radius: 15px;
-  /* cursor: pointer; */
-  /* box-shadow: 5px 5px 5px #b3b3b3; */
+  border-radius: 10px;
+  cursor: pointer;
 }
 </style>
